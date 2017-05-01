@@ -50,6 +50,7 @@ public:
                    const std::vector<std::string>& cflags = {},
                    const std::vector<USDT>& usdt = {});
 
+  void finalize_annotate() { bpf_module_->finalize_annotate(); }
   ~BPF();
   StatusTuple detach_all();
 

@@ -26,6 +26,8 @@ TEST_CASE("test bpf table", "[bpf_table]") {
   ebpf::StatusTuple res(0);
   res = bpf->init(BPF_PROGRAM);
   REQUIRE(res.code() == 0);
+  // table accesses below will use sscanf/snprintf helper functions
+  bpf->finalize_annotate();
 
   ebpf::BPFTable t = bpf->get_table("myhash");
 
