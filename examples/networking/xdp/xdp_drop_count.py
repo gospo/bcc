@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # xdp_drop_count.py Drop incoming packets on XDP layer and count for which
 #                   protocol type
@@ -128,10 +128,9 @@ int xdp_prog1(struct CTXTYPE *ctx) {
     return rc;
 }
 """, cflags=["-w", "-DRETURNCODE=%s" % ret, "-DCTXTYPE=%s" % ctxtype,
-			 "-DMAPTYPE=\"%s\"" % maptype],
-     device=offload_device)
+			 "-DMAPTYPE=\"%s\"" % maptype])
 
-fn = b.load_func("xdp_prog1", mode, offload_device)
+fn = b.load_func("xdp_prog1", mode)
 
 if mode == BPF.XDP:
     b.attach_xdp(device, fn, flags)
